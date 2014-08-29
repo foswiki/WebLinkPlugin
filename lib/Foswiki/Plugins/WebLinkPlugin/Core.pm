@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# WebLinkPlugin is Copyright (C) 2010-2013 Michael Daum http://michaeldaumconsulting.com
+# WebLinkPlugin is Copyright (C) 2010-2014 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -29,18 +29,18 @@ use Foswiki::Func ();
 our $baseWeb;
 our $baseTopic;
 
-use constant DEBUG => 0; # toggle me
+use constant TRACE => 0; # toggle me
 
 =begin TML
 
 ---++ writeDebug($message(
 
-prints a debug message to STDERR when this module is in DEBUG mode
+prints a debug message to STDERR when this module is in TRACE mode
 
 =cut
 
 sub writeDebug {
-  print STDERR "WebLinkPlugin::Core - $_[0]\n" if DEBUG;
+  print STDERR "WebLinkPlugin::Core - $_[0]\n" if TRACE;
 }
 
 =begin TML

@@ -26,7 +26,7 @@ Otherwise the normal topic name will be displayed as link text.
 -->
 
 |  Author(s): | Michael Daum|
-|  Copyright: | &copy; 2010-2013 Michael Daum http://michaeldaumconsulting.com |
+|  Copyright: | &copy; 2010-2014 Michael Daum http://michaeldaumconsulting.com |
 |  License: | [[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]] |
 |  Release: | %$RELEASE% |
 |  Version: | %$VERSION% |
