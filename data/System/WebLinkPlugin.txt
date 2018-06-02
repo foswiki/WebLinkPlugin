@@ -1,16 +1,16 @@
-%META:TOPICINFO{author="ProjectContributor" comment="" date="1527934709" format="1.1" version="1"}%
+%META:TOPICINFO{author="ProjectContributor" comment="" date="1527934900" format="1.1" version="1"}%
 ---+!! %TOPIC%
 %FORMFIELD{"Description"}%
 
 %TOC%
 
-This plugin allows to render a link to a web. While linking to a topic is quite essential to wikis,
-linking to a web as an object of the wiki isn't that well supported. Most commonly a link to a web points
-to the !%HOMETOPIC% topic of a web which serves as the entry point for all of the web. That's
-what %WEBLINK does as well. In addition it supports formatting the link in a custom way to
-display a more meaningful link text than the normal !WebHome text. If you optionally installed
-Foswiki:Extensions/DBCachePlugin, the %WEBLINK will be displaying the !TopicTitle of the target topic.
-Otherwise the normal topic name will be displayed as link text.
+This plugin allows to render a link to a web. While linking to a topic is quite
+essential to wikis, linking to a web as an object of the wiki isn't that well
+supported. Most commonly a link to a web points to the !%HOMETOPIC% topic of a
+web which serves as the entry point for all of the web. That's what %WEBLINK
+does as well. In addition it supports formatting the link in a custom way to
+display a more meaningful link text than the normal !WebHome text. The %WEBLINK
+will be displaying the !TopicTitle of the target topic.
 
 ---++ Usage
 
