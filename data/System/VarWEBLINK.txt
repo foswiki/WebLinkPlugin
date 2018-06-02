@@ -1,4 +1,5 @@
-%META:TOPICINFO{author="ProjectContributor" comment="" date="1291041934" format="1.1" version="2"}%
+%META:TOPICINFO{author="ProjectContributor" comment="" date="1527934709" format="1.1" version="1"}%
+%META:TOPICPARENT{name="WebLinkPlugin"}%
 #VarWEBLINK
 ---+++ WEBLINK
    * create a link to a web

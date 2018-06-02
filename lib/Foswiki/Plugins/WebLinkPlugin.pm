@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# WebLinkPlugin is Copyright (C) 2010-2014 Michael Daum http://michaeldaumconsulting.com
+# WebLinkPlugin is Copyright (C) 2010-2018 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -26,13 +26,11 @@ use warnings;
 
 use Foswiki::Func ();
 
-our $VERSION = '1.31';
-our $RELEASE = '1.31';
+our $VERSION = '2.00';
+our $RELEASE = '2 Jun 2018';
 our $SHORTDESCRIPTION = 'A parametrized %WEB macro';
 our $NO_PREFS_IN_TOPIC = 1;
-our $baseWeb;
-our $baseTopic;
-our $doneInit;
+our $core;
 
 =begin TML
 
@@ -41,16 +39,27 @@ our $doneInit;
 =cut
 
 sub initPlugin {
-  ($baseTopic, $baseWeb) = @_;
 
   Foswiki::Func::registerTagHandler('WEBLINK', sub {
-    require Foswiki::Plugins::WebLinkPlugin::Core;
-    Foswiki::Plugins::WebLinkPlugin::Core::init($baseWeb, $baseTopic);
-    return Foswiki::Plugins::WebLinkPlugin::Core::WEBLINK(@_);
+    return getCore()->handleWEBLINK(@_);
   });
 
-  $doneInit = 0;
   return 1;
 }
+
+sub finishPlugin {
+  undef $core;
+}
+
+sub getCore {
+
+  unless (defined $core) {
+    require Foswiki::Plugins::WebLinkPlugin::Core;
+    $core = Foswiki::Plugins::WebLinkPlugin::Core->new();
+  }
+
+  return $core;
+}
+
 
 1;

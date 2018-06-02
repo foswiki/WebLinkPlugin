@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# WebLinkPlugin is Copyright (C) 2010-2014 Michael Daum http://michaeldaumconsulting.com
+# WebLinkPlugin is Copyright (C) 2010-2018 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,17 +17,13 @@ package Foswiki::Plugins::WebLinkPlugin::Core;
 
 use strict;
 use warnings;
+use Foswiki::Func ();
 
 =begin TML
 
 ---+ package WebLinkPlugin::Core
 
 =cut
-
-use Foswiki::Func ();
-
-our $baseWeb;
-our $baseTopic;
 
 use constant TRACE => 0; # toggle me
 
@@ -45,14 +41,18 @@ sub writeDebug {
 
 =begin TML
 
----++ init($baseWeb, $baseTopic)
+---++ new
 
-initializer for the plugin core; called before any macro hanlder is executed
+constructor
 
 =cut
 
-sub init {
-  ($baseWeb, $baseTopic) = @_;
+sub new {
+  my $class = shift;
+
+  my $this = bless({@_}, $class);
+
+  return $this;
 }
 
 =begin TML
@@ -63,8 +63,8 @@ implementation of this macro
 
 =cut
 
-sub WEBLINK {
-  my ($session, $params, $topic, $web) = @_;
+sub handleWEBLINK {
+  my ($this, $session, $params, $topic, $web) = @_;
 
   writeDebug("called WEBLINK()");
 
@@ -94,7 +94,7 @@ sub WEBLINK {
     $session->getScriptUrl(0, 'view', $theWeb, $homeTopic);
 
   # unset the marker if this is not the current web 
-  $theMarker = '' unless $theWeb eq $baseWeb;
+  $theMarker = '' unless $theWeb eq $session->{webName};
 
   # normalize web name
   $theWeb =~ s/\//\./go;
@@ -107,7 +107,7 @@ sub WEBLINK {
 
   my $title = '';
   if ($theFormat =~ /\$title/) {
-    $title = getTopicTitle($theWeb, $homeTopic);
+    $title = Foswiki::Func::getTopicTitle($theWeb, $homeTopic);
     $title = $theName if $title eq $homeTopic;
   }
 
@@ -125,42 +125,5 @@ sub WEBLINK {
   #writeDebug("result=$result");
   return Foswiki::Func::decodeFormatTokens($result);
 }
-
-sub getTopicTitle {
-  my ($web, $topic) = @_;
-
-  my ($meta, $text) = Foswiki::Func::readTopic($web, $topic);
-
-  if ($Foswiki::cfg{SecureTopicTitles}) {
-    my $wikiName = Foswiki::Func::getWikiName();
-    return $topic
-      unless Foswiki::Func::checkAccessPermission('VIEW', $wikiName, $text, $topic, $web, $meta);
-  }
-
-  # read the formfield value
-  my $title = $meta->get('FIELD', 'TopicTitle');
-  $title = $title->{value} if $title;
-
-  # read the topic preference
-  unless ($title) {
-    $title = $meta->get('PREFERENCE', 'TOPICTITLE');
-    $title = $title->{value} if $title;
-  }
-
-  # read the preference
-  unless ($title)  {
-    Foswiki::Func::pushTopicContext($web, $topic);
-    $title = Foswiki::Func::getPreferencesValue('TOPICTITLE');
-    Foswiki::Func::popTopicContext();
-  }
-
-  # default to topic name
-  $title ||= $topic;
-
-  $title =~ s/\s*$//;
-  $title =~ s/^\s*//;
-
-  return $title;
-} 
 
 1;

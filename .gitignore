@@ -1,8 +1,9 @@
 *.swp
-WebLinkPlugin.md5
-WebLinkPlugin.sha1
-WebLinkPlugin.tgz
-WebLinkPlugin.txt
-WebLinkPlugin.zip
-WebLinkPlugin_installer
-WebLinkPlugin_installer.pl
+*,v
+/WebLinkPlugin.md5
+/WebLinkPlugin.sha1
+/WebLinkPlugin.tgz
+/WebLinkPlugin.txt
+/WebLinkPlugin.zip
+/WebLinkPlugin_installer
+/WebLinkPlugin_installer.pl
