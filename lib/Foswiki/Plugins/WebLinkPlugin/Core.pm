@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
-# WebLinkPlugin is Copyright (C) 2010-2018 Michael Daum http://michaeldaumconsulting.com
+# WebLinkPlugin is Copyright (C) 2010-2024 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,29 +15,17 @@
 
 package Foswiki::Plugins::WebLinkPlugin::Core;
 
-use strict;
-use warnings;
-use Foswiki::Func ();
-
 =begin TML
 
 ---+ package WebLinkPlugin::Core
 
 =cut
 
+use strict;
+use warnings;
+
+use Foswiki::Func ();
 use constant TRACE => 0; # toggle me
-
-=begin TML
-
----++ writeDebug($message(
-
-prints a debug message to STDERR when this module is in TRACE mode
-
-=cut
-
-sub writeDebug {
-  print STDERR "WebLinkPlugin::Core - $_[0]\n" if TRACE;
-}
 
 =begin TML
 
@@ -66,7 +54,7 @@ implementation of this macro
 sub handleWEBLINK {
   my ($this, $session, $params, $topic, $web) = @_;
 
-  writeDebug("called WEBLINK()");
+  _writeDebug("called WEBLINK()");
 
   # get params
   my $theWeb = $params->{_DEFAULT} || $params->{web} || $web;
@@ -79,7 +67,7 @@ sub handleWEBLINK {
 
   my $theFormat = $params->{format} || $defaultFormat;
 
-  #writeDebug("theFormat=$theFormat, theWeb=$theWeb");
+  #_writeDebug("theFormat=$theFormat, theWeb=$theWeb");
 
   my $theSummary = $params->{summary} || 
     Foswiki::Func::getPreferencesValue('WEBSUMMARY', $theWeb) || 
@@ -97,7 +85,7 @@ sub handleWEBLINK {
   $theMarker = '' unless $theWeb eq $session->{webName};
 
   # normalize web name
-  $theWeb =~ s/\//\./go;
+  $theWeb =~ s/\//\./g;
 
   # get a good default name
   unless ($theName) {
@@ -122,8 +110,14 @@ sub handleWEBLINK {
   $result =~ s/\$web/$theWeb/g;
   $result =~ s/\$topic/$homeTopic/g;
 
-  #writeDebug("result=$result");
+  #_writeDebug("result=$result");
   return Foswiki::Func::decodeFormatTokens($result);
 }
+
+# statics
+sub _writeDebug {
+  print STDERR "WebLinkPlugin::Core - $_[0]\n" if TRACE;
+}
+
 
 1;

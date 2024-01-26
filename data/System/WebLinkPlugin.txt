@@ -23,6 +23,7 @@ will be displaying the !TopicTitle of the target topic.
 %$DEPENDENCIES%
 
 ---++ Change History
+|  26 Jan 2024 | remove /o flag from regexes |
 |  02 Jun 2018 | modernized code; depend on new !TopicTitlePlugin |
 |  14 Mar 2013 | removed use of !DBCachePlugin |
 |  07 May 2012 | added web summary as defined in the WEBSUMMARY preference variable |
@@ -31,7 +32,7 @@ will be displaying the !TopicTitle of the target topic.
 
 %META:FORM{name="PackageForm"}%
 %META:FIELD{name="Author" title="Author" value="Michael Daum"}%
-%META:FIELD{name="Copyright" title="Copyright" value="&copy; 2010-2018 Michael Daum http://michaeldaumconsulting.com"}%
+%META:FIELD{name="Copyright" title="Copyright" value="&copy; 2010-2024 Michael Daum"}%
 %META:FIELD{name="Description" title="Description" value="%25$SHORTDESCRIPTION%25"}%
 %META:FIELD{name="Home" title="Home" value="Foswiki:Extensions/%TOPIC%"}%
 %META:FIELD{name="License" title="License" value="[[http://www.gnu.org/licenses/gpl.html][GPL (Gnu General Public License)]]"}%
